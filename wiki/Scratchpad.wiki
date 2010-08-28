@@ -1,5 +1,6 @@
 #summary One-sentence summary of this page.
 
+{{{
 Income 1 = 600
 Income 2 = 800
 
@@ -10,7 +11,8 @@ Bill = 42
 
 
 ratio1 = .42 = (600.0/(600.0+800.0))
-amount
+amount = 17.64 = 42*.42
 
 ratio2 = .57 = (800.0/(600.0+800.0))
-amount2 = 23.939999999 = 42*
+amount2 = 23.939999999 = 42*.57
+}}}
