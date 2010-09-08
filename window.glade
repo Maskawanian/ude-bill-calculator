@@ -3,6 +3,7 @@
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkWindow" id="mainWindow">
+    <property name="title" translatable="yes">Bill Calculator</property>
     <property name="window_position">center</property>
     <property name="default_width">400</property>
     <property name="default_height">300</property>
