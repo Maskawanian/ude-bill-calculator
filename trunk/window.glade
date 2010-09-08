@@ -3,6 +3,9 @@
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkWindow" id="mainWindow">
+    <property name="window_position">center</property>
+    <property name="default_width">400</property>
+    <property name="default_height">300</property>
     <child>
       <object class="GtkTable" id="table1">
         <property name="visible">True</property>
@@ -28,7 +31,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="hscrollbar_policy">automatic</property>
-            <property name="vscrollbar_policy">automatic</property>
+            <property name="shadow_type">etched-in</property>
             <child>
               <object class="GtkTreeView" id="peopleList">
                 <property name="visible">True</property>
