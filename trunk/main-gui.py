@@ -37,15 +37,9 @@ class App:
 		
 		# Create Store
 		self.store = gtk.ListStore(str, str, str)
-		iterator = self.store.append(["Person 1","5","5"])
+		self.store.append(["Person 1","5","5"])
 		self.store.append(["Person 2","5","5"])
 		self.tree_view.set_model(self.store)
-		
-		
-		
-		
-		
-		
 		
 		
 		
