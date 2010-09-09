@@ -21,24 +21,23 @@ class App:
 		
 		# Create View
 		self.tree_view = self.builder.get_object("peopleList")
-		self.tree_view.set_rules_hint(True)
 		
-		column = gtk.TreeViewColumn("Name", gtk.CellRendererText(), text=0)
+		renderer = gtk.CellRendererText()
+		renderer.set_property("editable",True)
+		column = gtk.TreeViewColumn("Name", renderer, text=0)
 		column.set_sort_column_id(0)	
 		self.tree_view.append_column(column)
 		
-		column = gtk.TreeViewColumn("Earnings", gtk.CellRendererText(), text=1)
+		renderer = gtk.CellRendererText()
+		renderer.set_property("editable",True)
+		column = gtk.TreeViewColumn("Earnings", renderer, text=1)
 		column.set_sort_column_id(1)
 		self.tree_view.append_column(column)
 		
-		column = gtk.TreeViewColumn("Due", gtk.CellRendererText(), text=2)
-		column.set_sort_column_id(2)
-		self.tree_view.append_column(column)
-		
 		# Create Store
-		self.store = gtk.ListStore(str, str, str)
-		self.store.append(["Person 1","5","5"])
-		self.store.append(["Person 2","5","5"])
+		self.store = gtk.ListStore(str, str)
+		self.store.append(["Person 1","5"])
+		self.store.append(["Person 2","5"])
 		self.tree_view.set_model(self.store)
 		
 		
