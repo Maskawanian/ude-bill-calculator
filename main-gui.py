@@ -4,18 +4,44 @@ import gobject
 gobject.threads_init ()
 import gtk,gio
 import sys
-
+from Assistant import Assistant
+from AssistantPage import AssistantPage
 # http://zetcode.com/tutorials/pygtktutorial/advancedwidgets/
 
 class App:
+	assistant = None
+	
 	builder = None
 	window = None
 	tree_view = None
 	store = None
 	
 	def __init__(self):
+		
+		assistant = Assistant()
+		
+		
+		page1 = AssistantPage()
+		page1.title_side = "Bill"
+		page1.title_top = "Enter Bill Information:"
+		assistant.add_page(page1)
+		
+		page2 = AssistantPage()
+		page2.title_side = "Finances"
+		page2.title_top = "Enter the Party's Financial Information:"
+		assistant.add_page(page2)
+		
+		page3 = AssistantPage()
+		page3.title_side = "Results"
+		page3.title_top = "Results:"
+		assistant.add_page(page3)
+		
+		
+		assistant.show()
+		
+		
 		self.builder = gtk.Builder()
-		self.builder.add_from_file("window.glade")
+		self.builder.add_from_file("assistant.glade")
 		self.window = self.builder.get_object("mainWindow")
 		self.window.connect("destroy", self.destroy)
 		
