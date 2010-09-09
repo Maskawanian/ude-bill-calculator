@@ -20,30 +20,53 @@ class App:
 		
 		assistant = Assistant()
 		
+		self.builder = gtk.Builder()
+		self.builder.add_from_file("window.glade")
 		
 		page1 = AssistantPage()
 		page1.title_side = "Bill"
 		page1.title_top = "Enter Bill Information:"
+		page1.widget = self.builder.get_object("vboxPage1")
 		assistant.add_page(page1)
 		
 		page2 = AssistantPage()
 		page2.title_side = "Finances"
 		page2.title_top = "Enter the Party's Financial Information:"
+		page2.widget = self.builder.get_object("vboxPage2")
 		assistant.add_page(page2)
 		
 		page3 = AssistantPage()
 		page3.title_side = "Results"
 		page3.title_top = "Results:"
+		page3.widget = self.builder.get_object("scrolledwindowPage3")
 		assistant.add_page(page3)
 		
 		
-		assistant.show()
 		
 		
-		self.builder = gtk.Builder()
-		self.builder.add_from_file("assistant.glade")
-		self.window = self.builder.get_object("mainWindow")
-		self.window.connect("destroy", self.destroy)
+		assistant.window.connect("destroy", self.destroy)
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		# Create View
 		self.tree_view = self.builder.get_object("peopleList")
@@ -69,8 +92,7 @@ class App:
 		
 		
 		self.tree_view.set_model(self.store)
-		
-		self.window.show_all()
+		assistant.show()
 	
 	
 	
