@@ -25,7 +25,7 @@ class App:
 		renderer = gtk.CellRendererText()
 		renderer.set_property("editable",True)
 		column = gtk.TreeViewColumn("Name", renderer, text=0)
-		column.set_sort_column_id(0)	
+		column.set_sort_column_id(0)
 		self.tree_view.append_column(column)
 		
 		renderer = gtk.CellRendererText()
