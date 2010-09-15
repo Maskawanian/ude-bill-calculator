@@ -7,7 +7,7 @@ import gtk,gio
 class Assistant(gobject.GObject):
 	
 	__gsignals__ = {
-		"new-page" : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (gobject.TYPE_PYOBJECT,)),
+		"switch-page" : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (gobject.TYPE_PYOBJECT,)),
 	}
 	
 	builder = None
