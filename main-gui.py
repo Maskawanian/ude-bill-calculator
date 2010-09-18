@@ -4,6 +4,7 @@ import gobject
 gobject.threads_init ()
 import gtk,gio
 import sys
+
 from Assistant import Assistant
 from AssistantPage import AssistantPage
 from Calculator import Person,Calculator
@@ -143,17 +144,26 @@ class App:
 		elif page == self.asnt_p2:
 			pass
 		elif page == self.asnt_p3:
+			charge = float(self.bill_entry.get_text())
 			
 			calc_people = []
 			for person in self.people:
 				calc_people.append(Person(person[0],person[1]))
 			
+			calc = Calculator()
+			calc.people = calc_people
+			calc.charge = charge
+			calc.calculate()
+			
+			str = ""
 			
 			
+			str+= "Total income including all parties: ${0:03.2f}\n\n".format(calc.total_income)
 			
+			for p in calc.people:
+				str+= "Amount due by {0} whose income is ${1:03.2f} is ${2:03.2f}.\n".format(p.name,p.income,p.due)
 			
-			
-			
+			str+= "\nEach party is paying {0:03.2f}% of their income.".format(calc.due_percent)
 			
 			
 			
@@ -163,7 +173,7 @@ class App:
 			
 			
 			buf = self.res_tv.get_buffer()
-			buf.set_text(repr(self.people))
+			buf.set_text(str)
 		
 		print "__change_page_cb",page
 

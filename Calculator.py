@@ -1,3 +1,5 @@
+import math
+
 class Person():
 	name = ""
 	income = 0.0
