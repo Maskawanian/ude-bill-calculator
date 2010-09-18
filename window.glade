@@ -9,7 +9,7 @@
     <property name="hscrollbar_policy">automatic</property>
     <property name="shadow_type">etched-in</property>
     <child>
-      <object class="GtkTextView" id="textview2">
+      <object class="GtkTextView" id="resultTextview">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="editable">False</property>
@@ -116,7 +116,7 @@ To begin, enter in the amount on the bill that you wish to split.</property>
       </packing>
     </child>
     <child>
-      <object class="GtkEntry" id="entry2">
+      <object class="GtkEntry" id="billEntry">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="invisible_char">&#x25CF;</property>

@@ -38,7 +38,7 @@ class Assistant(gobject.GObject):
 		
 	def show(self):
 		# Build
-		self.__pages[0].is_selected = True
+		
 		for page in self.__pages:
 			
 			# Side Label
@@ -67,12 +67,23 @@ class Assistant(gobject.GObject):
 		for page in self.__pages:
 			if page.is_selected:
 				page.side_label.set_markup("<b>"+page.title_side+"</b>")
+				self.__label_top_title.set_markup("<b> "+page.title_top+"</b>")
 			else:
-				page.side_label.set_markup(page.title_side)
+				if page.side_label:
+					page.side_label.set_markup(page.title_side)
+		
+		
 	
 	def __nb_change_current_page_cb(self, widget, data, pagenum):
 		self.__button_back.set_sensitive(pagenum!=0)
-		print "__nb_change_current_page_cb"
+		self.emit("switch-page",self.__pages[pagenum])
+		
+		i=0
+		for page in self.__pages:
+			page.is_selected = pagenum==i
+			i+=1
+		
+		self.__rejigger()
 	
 	def __click_back(self, widget, data=None):
 		self.__nb.prev_page()
