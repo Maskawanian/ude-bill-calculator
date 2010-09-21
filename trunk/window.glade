@@ -126,5 +126,36 @@ To begin, enter in the amount on the bill that you wish to split.</property>
         <property name="position">1</property>
       </packing>
     </child>
+    <child>
+      <object class="GtkHBox" id="billValidationTipHBox">
+        <property name="spacing">10</property>
+        <child>
+          <object class="GtkImage" id="image1">
+            <property name="visible">True</property>
+            <property name="stock">gtk-dialog-warning</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label1">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">&lt;span color="red"&gt;Amount cannot be empty, and can only contain numbers or 
+decimals.&lt;/span&gt;</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="position">2</property>
+      </packing>
+    </child>
   </object>
 </interface>
