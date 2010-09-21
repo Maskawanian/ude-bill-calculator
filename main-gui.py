@@ -4,6 +4,7 @@ import gobject
 gobject.threads_init ()
 import gtk,gio
 import sys
+import re
 
 from Assistant import Assistant
 from AssistantPage import AssistantPage
@@ -16,6 +17,7 @@ class App:
 	builder = None
 	window = None
 	bill_entry = None
+	bill_validation_tip_hbox = None
 	tree_view = None
 	col1 = None
 	col1_rend = None
@@ -35,6 +37,7 @@ class App:
 		
 		self.asnt = Assistant()
 		self.asnt.connect("switch-page",self.__switch_page_cb)
+		self.asnt.connect("validate-page",self.__validate_page_cb)
 		self.asnt.window.connect("destroy", self.destroy)
 		
 		self.builder = gtk.Builder()
@@ -87,6 +90,7 @@ class App:
 		
 		# Create View
 		self.bill_entry = self.builder.get_object("billEntry")
+		self.bill_validation_tip_hbox = self.builder.get_object("billValidationTipHBox")
 		#self.bill_entry.modify_base(gtk.STATE_NORMAL,gtk.gdk.color_parse("#FF7F7F"))
 		
 		
@@ -176,7 +180,43 @@ class App:
 			buf.set_text(str)
 		
 		print "__change_page_cb",page
-
+	def __validate_page_cb(self,assistant,page):
+		if page == self.asnt_p1:
+			return self.__validate_page1()
+		
+		
+		return self.asnt.VALIDATE_SUCCESS
+	
+	def __validate_page1(self):
+		str = self.bill_entry.get_text()
+		if str == "":
+			self.bill_entry.modify_base(gtk.STATE_NORMAL,gtk.gdk.color_parse("#FF7F7F"))
+			self.bill_validation_tip_hbox.show()
+			return self.asnt.VALIDATE_FAIL
+		
+		notnum = re.compile(r"[^0-9\.]")
+		if notnum.search(str):
+			self.bill_entry.modify_base(gtk.STATE_NORMAL,gtk.gdk.color_parse("#FF7F7F"))
+			self.bill_validation_tip_hbox.show()
+			return self.asnt.VALIDATE_FAIL
+		
+		self.bill_entry.modify_base(gtk.STATE_NORMAL,None)
+		self.bill_validation_tip_hbox.hide()
+		return self.asnt.VALIDATE_SUCCESS
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 

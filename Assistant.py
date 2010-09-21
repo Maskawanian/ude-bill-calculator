@@ -8,6 +8,7 @@ class Assistant(gobject.GObject):
 	
 	__gsignals__ = {
 		"switch-page" : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, (gobject.TYPE_PYOBJECT,)),
+		"validate-page" : (gobject.SIGNAL_RUN_LAST, int, (gobject.TYPE_PYOBJECT,)),
 	}
 	
 	builder = None
@@ -19,8 +20,12 @@ class Assistant(gobject.GObject):
 	__nb = None
 	__pages = []
 	
+	VALIDATE_UNKNOWN, VALIDATE_SUCCESS, VALIDATE_FAIL = range(3)
+	
+	
 	def __init__(self):
 		gobject.GObject.__init__(self)
+		#self.connect("validate-page",self.__validate_page_cb)
 		
 		self.builder = gtk.Builder()
 		
@@ -54,7 +59,8 @@ class Assistant(gobject.GObject):
 		self.__rejigger()
 		
 		# Show
-		self.window.show_all()
+		self.__vbox_side_title.show_all()
+		self.window.show()
 		
 		
 		
@@ -86,13 +92,15 @@ class Assistant(gobject.GObject):
 		self.__rejigger()
 	
 	def __click_back(self, widget, data=None):
+		#Do not validate to go back.
+		#res = self.emit("validate-page",self.__pages[self.__nb.get_current_page()])
+		#if res == self.VALIDATE_UNKNOWN or res == VALIDATE_SUCCESS:
 		self.__nb.prev_page()
 	
 	def __click_continue(self, widget, data=None):
-		self.__nb.next_page()
-	
-	
-	
+		res = self.emit("validate-page",self.__pages[self.__nb.get_current_page()])
+		if res == self.VALIDATE_UNKNOWN or res == self.VALIDATE_SUCCESS:
+			self.__nb.next_page()
 	
 	
 	
