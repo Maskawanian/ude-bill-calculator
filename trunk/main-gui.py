@@ -19,6 +19,8 @@ class App:
 	bill_entry = None
 	bill_validation_tip_hbox = None
 	tree_view = None
+	add_button = None
+	remove_button = None
 	col1 = None
 	col1_rend = None
 	col2 = None
@@ -71,7 +73,6 @@ class App:
 		
 		
 		
-		
 		self.people.append(["Person 1","5"])
 		self.people.append(["Person 2","5"])
 		
@@ -111,6 +112,11 @@ class App:
 		self.col2.set_sort_column_id(1)
 		self.tree_view.append_column(self.col2)
 		
+		self.add_button = self.builder.get_object("addButton")
+		self.add_button.connect("clicked",self.p2_add_row)
+		self.remove_button = self.builder.get_object("removeButton")
+		self.remove_button.connect("clicked",self.p2_remove_row)
+		
 		self.res_tv = self.builder.get_object("resultTextview")
 		
 		
@@ -125,6 +131,32 @@ class App:
 		
 		self.tree_view.set_model(self.store)
 		self.asnt.show()
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	def p2_add_row(self,widget,data=None):
+		self.store.append(["New Party","0"])
+		self.people.append(["New Party","0"])
+		
+		iter = self.store.get_iter_from_string(str(len(self.people)-1))
+		path = self.store.get_path(iter)
+		self.tree_view.set_cursor(path,self.col1,True)
+	
+	def p2_remove_row(self,widget,data=None):
+		
+		selection = self.tree_view.get_selection()
+		model, iter = selection.get_selected()
+		if None != iter:
+			path = model.get_path(iter)
+			row = path[0] # We can only select 1 so just access the first index
+			del self.people[row]
+			self.store.remove(iter)
 	
 	def col1_edited(self,renderer,path,newtext):
 		iter = self.store.get_iter_from_string(path)

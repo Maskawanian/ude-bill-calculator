@@ -62,7 +62,7 @@ Typically you would want to do it in whatever increment the bills are paid in. F
       <object class="GtkHBox" id="hbox4">
         <property name="visible">True</property>
         <child>
-          <object class="GtkButton" id="button5">
+          <object class="GtkButton" id="addButton">
             <property name="label" translatable="yes">Add</property>
             <property name="width_request">85</property>
             <property name="visible">True</property>
@@ -75,7 +75,7 @@ Typically you would want to do it in whatever increment the bills are paid in. F
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="button6">
+          <object class="GtkButton" id="removeButton">
             <property name="label" translatable="yes">Remove</property>
             <property name="width_request">85</property>
             <property name="visible">True</property>
