@@ -19,6 +19,7 @@ class Assistant(gobject.GObject):
 	__button_continue = None
 	__nb = None
 	__pages = []
+	on_last_page_disable_continue = True
 	
 	VALIDATE_UNKNOWN, VALIDATE_SUCCESS, VALIDATE_FAIL = range(3)
 	
@@ -78,6 +79,11 @@ class Assistant(gobject.GObject):
 				if page.side_label:
 					page.side_label.set_markup(page.title_side)
 		
+		last_page = self.__pages[len(self.__pages)-1]
+		if last_page.is_selected and self.on_last_page_disable_continue:
+			self.__button_continue.set_sensitive(False)
+		else:
+			self.__button_continue.set_sensitive(True)
 		
 	
 	def __nb_change_current_page_cb(self, widget, data, pagenum):
