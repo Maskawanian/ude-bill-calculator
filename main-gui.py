@@ -1,4 +1,4 @@
-import pygtk
+import os,pygtk
 pygtk.require('2.0')
 import gobject
 gobject.threads_init ()
@@ -36,6 +36,14 @@ class App:
 	
 	
 	def __init__(self):
+		glade_prefix = ""
+		try:
+			glade_prefix = os.environ["GLADE_PREFIX"]
+		except KeyError:
+			print "No Glade Environment"
+		
+		
+		
 		
 		self.asnt = Assistant()
 		self.asnt.connect("switch-page",self.__switch_page_cb)
@@ -43,7 +51,7 @@ class App:
 		self.asnt.window.connect("destroy", self.destroy)
 		
 		self.builder = gtk.Builder()
-		self.builder.add_from_file("window.glade")
+		self.builder.add_from_file(glade_prefix+"window.glade")
 		
 		self.asnt_p1 = AssistantPage()
 		self.asnt_p1.title_side = "Bill"

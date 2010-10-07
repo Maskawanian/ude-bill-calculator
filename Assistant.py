@@ -2,7 +2,7 @@ import pygtk
 pygtk.require('2.0')
 import gobject
 gobject.threads_init ()
-import gtk,gio
+import os,gtk,gio
 
 class Assistant(gobject.GObject):
 	
@@ -23,14 +23,20 @@ class Assistant(gobject.GObject):
 	
 	VALIDATE_UNKNOWN, VALIDATE_SUCCESS, VALIDATE_FAIL = range(3)
 	
-	
 	def __init__(self):
 		gobject.GObject.__init__(self)
 		#self.connect("validate-page",self.__validate_page_cb)
 		
 		self.builder = gtk.Builder()
 		
-		self.builder.add_from_file("assistant.glade")
+		glade_prefix = ""
+		try:
+			glade_prefix = os.environ["GLADE_PREFIX"]
+		except KeyError:
+			print "No Glade Environment"
+		
+		
+		self.builder.add_from_file(glade_prefix+"assistant.glade")
 		self.window = self.builder.get_object("mainWindow")
 		self.__vbox_side_title = self.builder.get_object("vboxSideTitle")
 		self.__label_top_title = self.builder.get_object("labelTopTitle")

@@ -1,0 +1,2 @@
+#!/bin/sh
+GLADE_PREFIX=/usr/share/ude/bill-calculator/ python /usr/share/ude/bill-calculator/main-gui.pyc "$@"
