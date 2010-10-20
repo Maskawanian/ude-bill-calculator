@@ -3,7 +3,7 @@ pkgname=ude-bill-calculator
 _datever=20101006
 _miniver=1
 pkgver=$_datever.$_miniver
-pkgrel=1
+pkgrel=2
 
 pkgdesc="A tool to calculate \"fair\" bill payments between multiple parties."
 arch=(any)
@@ -19,13 +19,13 @@ depends=(
 			)
 install='ude-bill-calculator.install'
 md5sums=('e8b5b7720caf26947feb9ad75c943c9a'
-         'aca18da28afbfa1c0174ba3c8800f3be'
+         '28aa158a6a1b8809110d8daad7a26de2'
          'c41e936ae3808c5f1f0c6b866ca01fec')
 
 
 build() {
 	cd $srcdir/$pkgname
-	python -m compileall .
+	python2 -m compileall .
 	
 	mkdir -p $pkgdir/usr/share/ude/bill-calculator
 	#cp $srcdir/$pkgname/*.py $pkgdir/usr/share/ude/bill-calculator
