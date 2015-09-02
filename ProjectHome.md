@@ -1,0 +1,1 @@
+A tool to calculate "fair" bill payments between multiple parties.
